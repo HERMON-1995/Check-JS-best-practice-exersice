@@ -27,9 +27,12 @@ const displayList = () => {
   });
 };
 
+const x = () => {
+  localGet();
+};
+
 const addList = (description, completed, index) => {
   const listAdded = new ListTemplate(description, completed, index);
-  const x = localGet();
   x.push(listAdded);
   localStorage.setItem('listStorage', JSON.stringify(x));
   todoTask.value = '';
@@ -44,7 +47,7 @@ const reAssignIndex = (filteredArray) => {
 };
 
 window.removeList = (id) => {
-  const filteredArray = localGet().filter((item) => {
+  const filteredArray = x.filter((item) => {
     if (item.index !== id) {
       return item;
     }
@@ -58,11 +61,11 @@ window.removeList = (id) => {
 
 window.updateList = (id) => {
   const updateInput = document.querySelector(`#input-${id}`).value;
-  const updateArray = localGet().map((item) => {
+  const updateArray = x.map((item) => {
     if (item.index - 1 === id) {
       item.description = updateInput;
 
-      if (item.completed === true) {
+      if (item.completed) {
         item.completed = false;
       } else {
         item.completed = true;

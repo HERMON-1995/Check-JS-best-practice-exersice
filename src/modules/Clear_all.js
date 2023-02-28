@@ -9,7 +9,7 @@ const clearCompleted = () => {
   });
 
   incompleted = incompleted.map((item, id) => {
-    item.index = id + 1;
+    item.index = id++;
     return item;
   });
 
